@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://bei0wwd26bjd"]
+
+[ext_resource type="Script" path="res://scenes/manager/AnimationManager.gd" id="1_7l3n1"]
+[ext_resource type="Texture2D" uid="uid://dpsi1vkta8nof" path="res://assets/Spritesheet.png" id="2_384n8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c56dt"]
+atlas = ExtResource("2_384n8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fud2"]
+atlas = ExtResource("2_384n8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blhic"]
+atlas = ExtResource("2_384n8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5rkh"]
+atlas = ExtResource("2_384n8")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e138u"]
+atlas = ExtResource("2_384n8")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_im3io"]
+atlas = ExtResource("2_384n8")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvi54"]
+atlas = ExtResource("2_384n8")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4g2u"]
+atlas = ExtResource("2_384n8")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ryb2p"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c56dt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fud2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blhic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5rkh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e138u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_im3io")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvi54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4g2u")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 8.0
+}]
+
+[node name="AnimationManager" type="Node2D"]
+position = Vector2(0, -13)
+script = ExtResource("1_7l3n1")
+
+[node name="explosion_animaiton" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_ryb2p")
+autoplay = "default"

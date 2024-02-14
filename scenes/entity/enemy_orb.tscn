@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://yotx3h561y2m"]
+
+[ext_resource type="Script" path="res://scenes/entity/enemy_orb.gd" id="1_7e5va"]
+[ext_resource type="Texture2D" uid="uid://b44t5jr2lqq5q" path="res://assets/enemy_orb.png" id="2_ioxpe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vpf4s"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cyw7i"]
+radius = 4.0
+
+[node name="EnemyOrb" type="CharacterBody2D" groups=["bomb"]]
+collision_layer = 8
+collision_mask = 28
+motion_mode = 1
+script = ExtResource("1_7e5va")
+speed = 300
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
+texture = ExtResource("2_ioxpe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_vpf4s")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_cyw7i")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

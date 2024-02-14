@@ -1,0 +1,136 @@
+[gd_scene load_steps=22 format=3 uid="uid://cxwyt0qy0w8a2"]
+
+[ext_resource type="Texture2D" uid="uid://frmdumk5kchp" path="res://assets/ship.png" id="1_50hy5"]
+[ext_resource type="Script" path="res://scenes/entity/player.gd" id="1_50lvy"]
+[ext_resource type="PackedScene" uid="uid://dfhy5fajypfff" path="res://scenes/entity/bullet.tscn" id="2_um0di"]
+[ext_resource type="PackedScene" uid="uid://bseavdlhkcvp7" path="res://scenes/manager/game_manager.tscn" id="3_3vm2n"]
+[ext_resource type="PackedScene" uid="uid://cyubnhaquaffc" path="res://scenes/handlers/input_handler.tscn" id="3_ooxru"]
+[ext_resource type="PackedScene" uid="uid://cyx77d2gsya3i" path="res://scenes/handlers/movement_handler.tscn" id="4_b78po"]
+[ext_resource type="PackedScene" uid="uid://bei0wwd26bjd" path="res://scenes/manager/animation_manager.tscn" id="4_ojf3a"]
+[ext_resource type="Script" path="res://utility/screen_wrap.gd" id="5_ma7ye"]
+[ext_resource type="Texture2D" uid="uid://dpsi1vkta8nof" path="res://assets/Spritesheet.png" id="6_0nvmm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulqt1"]
+atlas = ExtResource("1_50hy5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5ay5"]
+atlas = ExtResource("6_0nvmm")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic16a"]
+atlas = ExtResource("6_0nvmm")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuhwd"]
+atlas = ExtResource("6_0nvmm")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyyix"]
+atlas = ExtResource("6_0nvmm")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdhl2"]
+atlas = ExtResource("6_0nvmm")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08dq8"]
+atlas = ExtResource("6_0nvmm")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xi5pu"]
+atlas = ExtResource("6_0nvmm")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8g1ls"]
+atlas = ExtResource("6_0nvmm")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m45ij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulqt1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5ay5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic16a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuhwd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyyix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdhl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08dq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xi5pu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8g1ls")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aa7qi"]
+size = Vector2(40, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yisg"]
+size = Vector2(40, 41)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_50lvy")
+bullet_scene = ExtResource("2_um0di")
+game_manger = ExtResource("3_3vm2n")
+
+[node name="AnimationManager" parent="." instance=ExtResource("4_ojf3a")]
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_m45ij")
+animation = &"explode"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20.5)
+shape = SubResource("RectangleShape2D_aa7qi")
+
+[node name="InputHandler" parent="." instance=ExtResource("3_ooxru")]
+unique_name_in_owner = true
+
+[node name="MovementHandler" parent="." instance=ExtResource("4_b78po")]
+unique_name_in_owner = true
+movement_speed = 150.0
+acceleration = 10.0
+deceleration = 8.0
+
+[node name="ScreenWrap" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_ma7ye")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -20.5)
+shape = SubResource("RectangleShape2D_8yisg")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

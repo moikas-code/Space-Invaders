@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://diffyi7p4gd4y"]
+
+[ext_resource type="Script" path="res://scenes/ui/lives.gd" id="1_gbmgs"]
+[ext_resource type="Texture2D" uid="uid://frmdumk5kchp" path="res://assets/ship.png" id="1_xei75"]
+
+[sub_resource type="SystemFont" id="SystemFont_j7i47"]
+font_names = PackedStringArray("Monospace")
+
+[node name="LivesUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gbmgs")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Lives_Text" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_j7i47")
+theme_override_font_sizes/font_size = 24
+text = "Ships:"
+
+[node name="Life3" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(98, 11.208)
+scale = Vector2(0.5, 0.444)
+texture = ExtResource("1_xei75")
+
+[node name="Live2" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(124, 11.208)
+scale = Vector2(0.5, 0.444)
+texture = ExtResource("1_xei75")
+
+[node name="Life1" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(150, 11.208)
+scale = Vector2(0.5, 0.444)
+texture = ExtResource("1_xei75")

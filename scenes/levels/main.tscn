@@ -1,0 +1,164 @@
+[gd_scene load_steps=24 format=3 uid="uid://dcwd4q5posbgb"]
+
+[ext_resource type="Texture2D" uid="uid://tnq5btsbh2g8" path="res://assets/bg.png" id="1_38yxi"]
+[ext_resource type="PackedScene" uid="uid://cxwyt0qy0w8a2" path="res://scenes/entity/player.tscn" id="1_k8co2"]
+[ext_resource type="PackedScene" uid="uid://ct74qw1xrxbeb" path="res://scenes/manager/spawn_manager.tscn" id="1_vsku5"]
+[ext_resource type="PackedScene" uid="uid://dwgpcdfk7cxgb" path="res://scenes/entity/alien_a.tscn" id="2_2nh0m"]
+[ext_resource type="Script" path="res://config/enemy_config.gd" id="3_2brvf"]
+[ext_resource type="PackedScene" uid="uid://dhrfqyulsb07g" path="res://scenes/entity/bunker.tscn" id="4_6vi12"]
+[ext_resource type="PackedScene" uid="uid://dpc0x3toswnwy" path="res://scenes/entity/alien_b.tscn" id="4_jvnwl"]
+[ext_resource type="PackedScene" uid="uid://lbpvccprxpny" path="res://scenes/entity/alien_c.tscn" id="5_8ae5t"]
+[ext_resource type="PackedScene" uid="uid://bseavdlhkcvp7" path="res://scenes/manager/game_manager.tscn" id="7_ktr6p"]
+[ext_resource type="PackedScene" uid="uid://dh77li7t66g31" path="res://scenes/dead_zone.tscn" id="8_bqd6d"]
+[ext_resource type="PackedScene" uid="uid://b6ygt6bq0qg0x" path="res://scenes/entity/mothership.tscn" id="8_lgv8q"]
+[ext_resource type="PackedScene" uid="uid://dkkq4px5sbqgh" path="res://scenes/manager/audio_manager.tscn" id="10_wi64s"]
+[ext_resource type="PackedScene" uid="uid://diffyi7p4gd4y" path="res://scenes/ui/lives.tscn" id="11_ym7ct"]
+[ext_resource type="PackedScene" uid="uid://b83ssx1kr1kfd" path="res://scenes/end_game_zone.tscn" id="12_pya1u"]
+[ext_resource type="PackedScene" uid="uid://dcwl8lttcqwv" path="res://scenes/ui/score.tscn" id="13_gv7yg"]
+
+[sub_resource type="Resource" id="Resource_3t77d"]
+script = ExtResource("3_2brvf")
+enemy_type = ExtResource("2_2nh0m")
+points = 25
+
+[sub_resource type="Resource" id="Resource_oqu66"]
+script = ExtResource("3_2brvf")
+enemy_type = ExtResource("4_jvnwl")
+points = 15
+
+[sub_resource type="Resource" id="Resource_8lsqa"]
+script = ExtResource("3_2brvf")
+enemy_type = ExtResource("5_8ae5t")
+points = 10
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ode66"]
+size = Vector2(472, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dffkp"]
+size = Vector2(473, 81)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yd4q"]
+size = Vector2(472, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk0md"]
+size = Vector2(67, 840)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5aie"]
+size = Vector2(50, 842)
+
+[node name="Main" type="Node2D"]
+
+[node name="ManagerContainer" type="Node2D" parent="."]
+
+[node name="GameManager" parent="ManagerContainer" instance=ExtResource("7_ktr6p")]
+unique_name_in_owner = true
+
+[node name="SpawnManager" parent="ManagerContainer" node_paths=PackedStringArray("player_spawn_point", "spawn_grid_start", "bunker_spawn_grid_start", "mothership_spawn_point") instance=ExtResource("1_vsku5")]
+player_spawn_point = NodePath("../../LevelContainer/player_spawn_point")
+player_scene = ExtResource("1_k8co2")
+spawn_grid_start = NodePath("../../LevelContainer/Invader_Spawn_Grid_Point")
+bunker_spawn_grid_start = NodePath("../../LevelContainer/Bunker_Spawn_Grid_Point")
+enemy_spawn_data = Array[ExtResource("3_2brvf")]([SubResource("Resource_3t77d"), SubResource("Resource_oqu66"), SubResource("Resource_8lsqa")])
+bunker_spawn_data = ExtResource("4_6vi12")
+mothership_spawn_point = NodePath("../../LevelContainer/Mothership_spawn_point")
+mothership_scene = ExtResource("8_lgv8q")
+
+[node name="AudioManager" parent="ManagerContainer" instance=ExtResource("10_wi64s")]
+
+[node name="LevelContainer" type="Node2D" parent="."]
+
+[node name="player_spawn_point" type="Marker2D" parent="LevelContainer"]
+position = Vector2(172, 621)
+
+[node name="Mothership_spawn_point" type="Marker2D" parent="LevelContainer"]
+position = Vector2(333, 43)
+
+[node name="Invader_Spawn_Grid_Point" type="Marker2D" parent="LevelContainer"]
+position = Vector2(30, 77)
+
+[node name="Bunker_Spawn_Grid_Point" type="Marker2D" parent="LevelContainer"]
+position = Vector2(64, 567)
+
+[node name="TextureRect" type="TextureRect" parent="LevelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_top = -54.0
+offset_right = 191.0
+offset_bottom = 425.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.90729, 1.58122)
+texture = ExtResource("1_38yxi")
+stretch_mode = 1
+
+[node name="EndGameZone" parent="LevelContainer" instance=ExtResource("12_pya1u")]
+position = Vector2(64, 567)
+
+[node name="Area2D" parent="LevelContainer/EndGameZone" index="0"]
+position = Vector2(0, -34)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="LevelContainer/EndGameZone/Area2D" index="0"]
+position = Vector2(114, 0)
+shape = SubResource("RectangleShape2D_ode66")
+
+[node name="DeadZone" parent="LevelContainer" instance=ExtResource("8_bqd6d")]
+position = Vector2(-43, 659)
+
+[node name="Area2D" parent="LevelContainer/DeadZone" index="0"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="LevelContainer/DeadZone/Area2D" index="0"]
+position = Vector2(222.5, 30.5)
+shape = SubResource("RectangleShape2D_dffkp")
+
+[node name="DeadZone2" parent="LevelContainer" instance=ExtResource("8_bqd6d")]
+position = Vector2(-45, -102)
+
+[node name="CollisionShape2D" parent="LevelContainer/DeadZone2/Area2D" index="0"]
+position = Vector2(224, 18.5)
+shape = SubResource("RectangleShape2D_2yd4q")
+
+[node name="DeadZone3" parent="LevelContainer" instance=ExtResource("8_bqd6d")]
+position = Vector2(-202, 7)
+
+[node name="CollisionShape2D" parent="LevelContainer/DeadZone3/Area2D" index="0"]
+position = Vector2(109.5, 302)
+shape = SubResource("RectangleShape2D_kk0md")
+
+[node name="DeadZone4" parent="LevelContainer" instance=ExtResource("8_bqd6d")]
+position = Vector2(457, -31)
+
+[node name="CollisionShape2D" parent="LevelContainer/DeadZone4/Area2D" index="0"]
+position = Vector2(-14, 341)
+shape = SubResource("RectangleShape2D_g5aie")
+
+[node name="EntityContainer" type="Node2D" parent="." groups=["entity_container"]]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(180, 320)
+rotation = 1.5708
+
+[node name="UIContainer" type="Node2D" parent="."]
+
+[node name="LivesUI" parent="UIContainer" instance=ExtResource("11_ym7ct")]
+offset_left = 45.0
+offset_top = 13.0
+offset_right = 45.0
+offset_bottom = 13.0
+
+[node name="Score" parent="UIContainer" instance=ExtResource("13_gv7yg")]
+offset_left = 45.0
+offset_top = 626.0
+offset_right = 45.0
+offset_bottom = 626.0
+
+[editable path="LevelContainer/EndGameZone"]
+[editable path="LevelContainer/DeadZone"]
+[editable path="LevelContainer/DeadZone2"]
+[editable path="LevelContainer/DeadZone3"]
+[editable path="LevelContainer/DeadZone4"]

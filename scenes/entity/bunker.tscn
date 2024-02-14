@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhrfqyulsb07g"]
+
+[ext_resource type="Script" path="res://scenes/entity/bunker.gd" id="1_a4gwm"]
+[ext_resource type="Texture2D" uid="uid://6estf5hj853h" path="res://assets/bunker.png" id="1_vpohu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n44a0"]
+size = Vector2(24, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yuja"]
+size = Vector2(25, 21.5)
+
+[node name="Bunker" type="StaticBody2D" groups=["bunker"]]
+scale = Vector2(2, 2)
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_a4gwm")
+max_health = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("1_vpohu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_n44a0")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -10.75)
+shape = SubResource("RectangleShape2D_1yuja")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

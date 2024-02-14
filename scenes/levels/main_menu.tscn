@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://brkj7yojj75w5"]
+
+[ext_resource type="Texture2D" uid="uid://tnq5btsbh2g8" path="res://assets/bg.png" id="1_hoov0"]
+[ext_resource type="Script" path="res://scenes/levels/main_menu.gd" id="1_icq2t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jxqs6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x3ck"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 5.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0.996078)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_icq2t")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hoov0")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 140
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jxqs6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 48
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Space Invaders"
+
+[node name="play_game" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start Game"
+
+[node name="help" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_0x3ck")
+text = "Help"

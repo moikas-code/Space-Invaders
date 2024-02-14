@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwgpcdfk7cxgb"]
+
+[ext_resource type="Script" path="res://utility/screen_wrap.gd" id="2_8v6k8"]
+[ext_resource type="Texture2D" uid="uid://dvawd26v1hkql" path="res://assets/alien_a.png" id="2_m5e3q"]
+[ext_resource type="Script" path="res://scenes/entity/alien_a.gd" id="2_t7w42"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pj3m"]
+size = Vector2(32, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qm6t"]
+size = Vector2(32, 23)
+
+[node name="Alien_A" type="CharacterBody2D" groups=["alien"]]
+collision_layer = 4
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("2_t7w42")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("2_m5e3q")
+
+[node name="ScreenWrap" type="Node" parent="."]
+script = ExtResource("2_8v6k8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_5pj3m")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -12.5)
+shape = SubResource("RectangleShape2D_4qm6t")
+
+[node name="left" type="RayCast2D" parent="."]
+position = Vector2(-7, -12)
+target_position = Vector2(0, 46)
+collision_mask = 4
+
+[node name="right" type="RayCast2D" parent="."]
+position = Vector2(7, -12)
+target_position = Vector2(0, 46)
+collision_mask = 4
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

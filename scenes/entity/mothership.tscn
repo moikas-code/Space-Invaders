@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6ygt6bq0qg0x"]
+
+[ext_resource type="Texture2D" uid="uid://br3mab0hfjhxg" path="res://assets/mother_ship.png" id="1_fdo8t"]
+[ext_resource type="Script" path="res://scenes/entity/mothership.gd" id="1_rp6ky"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fx4mf"]
+radius = 15.0
+height = 74.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m3rbs"]
+radius = 16.0
+height = 76.0
+
+[node name="MotherShip" type="CharacterBody2D" groups=["mothership"]]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_rp6ky")
+points = 150
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+texture = ExtResource("1_fdo8t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -17)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_fx4mf")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -17)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_m3rbs")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

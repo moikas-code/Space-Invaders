@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://cejai2wqd6xo6"]
+
+[ext_resource type="Script" path="res://scenes/levels/gameover.gd" id="1_h11be"]
+[ext_resource type="Texture2D" uid="uid://tnq5btsbh2g8" path="res://assets/bg.png" id="2_ymypv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jxqs6"]
+
+[node name="YouWin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h11be")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ymypv")
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 140
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jxqs6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 48
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "You Win!"
+
+[node name="menu" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+text = "Menu
+"
+
+[node name="try_again" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play Again!"

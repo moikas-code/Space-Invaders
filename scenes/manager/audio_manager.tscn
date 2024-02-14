@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkkq4px5sbqgh"]
+
+[ext_resource type="Script" path="res://scenes/manager/audio_manager.gd" id="1_7qgka"]
+[ext_resource type="AudioStream" uid="uid://ccgae5cw8jicd" path="res://assets/audio/ship_explosion.wav" id="2_ia6ke"]
+[ext_resource type="AudioStream" uid="uid://bkdlo067em321" path="res://assets/audio/lazer.wav" id="3_xukvi"]
+[ext_resource type="AudioStream" uid="uid://8omj6t6cr3ef" path="res://assets/audio/alien_bomb.wav" id="4_3ofu8"]
+[ext_resource type="AudioStream" uid="uid://c48a0ui6cfjw1" path="res://assets/audio/shield.wav" id="5_qf4y3"]
+[ext_resource type="AudioStream" uid="uid://cf813e5p3hmcd" path="res://assets/audio/bg_si.wav" id="6_jgalu"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_7qgka")
+
+[node name="explosion" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_ia6ke")
+
+[node name="lazer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_xukvi")
+
+[node name="bomb" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_3ofu8")
+
+[node name="shield" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_qf4y3")
+
+[node name="bg" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_jgalu")

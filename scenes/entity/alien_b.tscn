@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpc0x3toswnwy"]
+
+[ext_resource type="PackedScene" uid="uid://8lxqhot20wmr" path="res://scenes/entity/base_enemy.tscn" id="1_eea3i"]
+[ext_resource type="Texture2D" uid="uid://smv4bhtla1rk" path="res://assets/alien_b.png" id="2_1wiyl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u10ig"]
+size = Vector2(32, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkko5"]
+size = Vector2(32, 23)
+
+[node name="Alien_B" instance=ExtResource("1_eea3i")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(0, -14)
+texture = ExtResource("2_1wiyl")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_u10ig")
+
+[node name="CollisionShape2D" parent="hitbox" index="0"]
+position = Vector2(0, -13.5)
+shape = SubResource("RectangleShape2D_lkko5")
